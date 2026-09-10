@@ -68,3 +68,15 @@
 	</array>
 </dict>
 </plist>
+
+<key>NSPhotoLibraryUsageDescription</key>
+<string>
+    Este aplicativo utiliza suas fotos para
+    selecionar uma imagem do usuário.
+</string>
+
+<key>NSCameraUsageDescription</key>
+<string>
+    Este aplicativo utiliza a câmera para
+    capturar a foto do usuário.
+</string>

@@ -6,6 +6,7 @@ import 'cadastros/cadastro_safras.dart';
 import 'cadastros/cadastro_tipoInformacao.dart';
 import 'cadastros/cadastro_unidade.dart';
 import 'cadastros/cadastro_unidadeMedida.dart';
+import 'cadastros/cadastro_usuario.dart';
 
 class TelaPrincipal extends StatefulWidget {
   const TelaPrincipal({super.key});
@@ -162,6 +163,21 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
         context,
         MaterialPageRoute(
           builder: (context) => const CadastroIndicadorPage(),
+        ),
+      );
+    },
+  ),
+
+  ListTile(
+  leading: const Icon(Icons.chevron_right),
+  title: const Text('Usuário'),
+  onTap: () {
+    Navigator.pop(context);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const CadastroUsuarioPage(),
         ),
       );
     },
