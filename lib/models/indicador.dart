@@ -1,45 +1,23 @@
 class Indicador {
-    final int? id;
-    final String nome;
-    final String descricao;
-    final String url;
-
-Indicador({
+  final int? id;
+  final String nome;
+  final String descricao;
+  final String url;
+  const Indicador({
     this.id,
     required this.nome,
     required this.descricao,
     required this.url,
   });
+  factory Indicador.fromJson(Map<String, dynamic> json) => Indicador(
+    id: (json['Id'] ?? json['id']) as int?,
+    nome: (json['Nome'] ?? json['nome'] ?? '') as String,
+    descricao: (json['Descricao'] ?? json['descricao'] ?? '') as String,
+    url: (json['Url'] ?? json['url'] ?? '') as String,
+  );
+  Map<String, dynamic> toJson() => {
+    'Nome': nome,
+    'Descricao': descricao,
+    'Url': url,
+  };
 }
-class Temperatura{
-  final int id;
-  final String nome;
-  final double valor;
-  final String unidade;
-  final DateTime data;
-
-  Temperatura({
-    required this.id,
-    required this.nome,
-    required this.valor,
-    required this.unidade,
-    required this.data,
-  });
-}
-
-class Umidade{
-  final int id;
-  final String nome;
-  final double valor;
-  final String unidade;
-  final DateTime data;
-
-  Umidade({
-    required this.id,
-    required this.nome,
-    required this.valor,
-    required this.unidade,
-    required this.data,
-  });
-}
-  
