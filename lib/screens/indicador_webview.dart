@@ -26,11 +26,12 @@ class _IndicadorWebviewPageState extends State<IndicadorWebviewPage> {
           }),
           onPageFinished: (_) => setState(() => carregando = false),
           onWebResourceError: (e) {
-            if (e.isForMainFrame == true)
+            if (e.isForMainFrame == true) {
               setState(() {
                 erro = e.description;
                 carregando = false;
               });
+            }
           },
         ),
       )

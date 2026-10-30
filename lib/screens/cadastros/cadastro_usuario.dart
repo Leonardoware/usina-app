@@ -1,34 +1,30 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../models/usuario.dart';
 
-import 'package:usina_app/models/usuario.dart';
 
 class CadastroUsuarioPage extends StatefulWidget {
   const CadastroUsuarioPage({super.key});
 
+
   @override
-  State<CadastroUsuarioPage> createState() =>
-      _CadastroUsuarioPageState();
+  State<CadastroUsuarioPage> createState() => _CadastroUsuarioPageState();
 }
 
-class _CadastroUsuarioPageState
-    extends State<CadastroUsuarioPage> {
-  final formKey = GlobalKey<FormState>();
 
+class _CadastroUsuarioPageState extends State<CadastroUsuarioPage> {
+  final formKey = GlobalKey<FormState>();
   final nomeController = TextEditingController();
   final emailController = TextEditingController();
   final senhaController = TextEditingController();
-
   final ImagePicker picker = ImagePicker();
-
   XFile? fotoSelecionada;
+
 
   void mostrarMensagem(String mensagem) {
     if (!mounted) return;
-
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(mensagem),
@@ -36,25 +32,24 @@ class _CadastroUsuarioPageState
     );
   }
 
+
   Future<void> selecionarFoto() async {
     try {
       final XFile? imagem = await picker.pickImage(
         source: ImageSource.gallery,
         imageQuality: 85,
       );
-
       if (imagem == null) return;
-
       setState(() {
         fotoSelecionada = imagem;
       });
     } on PlatformException catch (e) {
       mostrarMensagem(
-        'Não foi possível abrir as fotos: '
-        '${e.message ?? e.code}',
+        'Não foi possível abrir as fotos: ${e.message ?? e.code}',
       );
     }
   }
+
 
   Future<void> tirarFoto() async {
     try {
@@ -62,24 +57,21 @@ class _CadastroUsuarioPageState
         source: ImageSource.camera,
         imageQuality: 85,
       );
-
       if (imagem == null) return;
-
       setState(() {
         fotoSelecionada = imagem;
       });
     } on PlatformException catch (e) {
       mostrarMensagem(
-        'Não foi possível acessar a câmera: '
-        '${e.message ?? e.code}',
+        'Não foi possível acessar a câmera: ${e.message ?? e.code}',
       );
     } catch (_) {
       mostrarMensagem(
-        'Câmera indisponível. '
-        'Selecione uma foto da galeria.',
+        'Câmera indisponível. Selecione uma foto da galeria.',
       );
     }
   }
+
 
   void salvar() {
     if (formKey.currentState!.validate()) {
@@ -89,28 +81,25 @@ class _CadastroUsuarioPageState
         senha: senhaController.text.trim(),
         fotoPath: fotoSelecionada?.path,
       );
-
       print('Nome: ${usuario.nome}');
       print('E-mail: ${usuario.email}');
       print('Senha: ${usuario.senha}');
-      print(
-        'Foto: ${usuario.fotoPath ?? "sem foto"}',
-      );
-
+      print('Foto: ${usuario.fotoPath ?? "sem foto"}');
       mostrarMensagem(
         'Usuário validado com sucesso!',
       );
     }
   }
 
+
   @override
   void dispose() {
     nomeController.dispose();
     emailController.dispose();
     senhaController.dispose();
-
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -123,22 +112,17 @@ class _CadastroUsuarioPageState
         child: Form(
           key: formKey,
           child: Column(
-            crossAxisAlignment:
-                CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Center(
                 child: CircleAvatar(
                   radius: 70,
-                  backgroundColor:
-                      Colors.blue.shade50,
-                  backgroundImage:
-                      fotoSelecionada == null
-                          ? null
-                          : FileImage(
-                              File(
-                                fotoSelecionada!.path,
-                              ),
-                            ),
+                  backgroundColor: Colors.blue.shade50,
+                  backgroundImage: fotoSelecionada == null
+                      ? null
+                      : FileImage(
+                          File(fotoSelecionada!.path),
+                        ),
                   child: fotoSelecionada == null
                       ? const Icon(
                           Icons.person,
@@ -147,9 +131,7 @@ class _CadastroUsuarioPageState
                       : null,
                 ),
               ),
-
               const SizedBox(height: 16),
-
               Row(
                 children: [
                   Expanded(
@@ -163,9 +145,7 @@ class _CadastroUsuarioPageState
                       ),
                     ),
                   ),
-
                   const SizedBox(width: 12),
-
                   Expanded(
                     child: ElevatedButton.icon(
                       onPressed: tirarFoto,
@@ -179,9 +159,7 @@ class _CadastroUsuarioPageState
                   ),
                 ],
               ),
-
               const SizedBox(height: 24),
-
               TextFormField(
                 controller: nomeController,
                 decoration: const InputDecoration(
@@ -189,42 +167,31 @@ class _CadastroUsuarioPageState
                   border: OutlineInputBorder(),
                 ),
                 validator: (valor) {
-                  if (valor == null ||
-                      valor.trim().isEmpty) {
+                  if (valor == null || valor.trim().isEmpty) {
                     return 'Informe o nome';
                   }
-
                   return null;
                 },
               ),
-
               const SizedBox(height: 16),
-
               TextFormField(
                 controller: emailController,
-                keyboardType:
-                    TextInputType.emailAddress,
+                keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   labelText: 'E-mail',
                   border: OutlineInputBorder(),
                 ),
                 validator: (valor) {
-                  if (valor == null ||
-                      valor.trim().isEmpty) {
+                  if (valor == null || valor.trim().isEmpty) {
                     return 'Informe o e-mail';
                   }
-
-                  if (!valor.contains('@') ||
-                      !valor.contains('.')) {
+                  if (!valor.contains('@') || !valor.contains('.')) {
                     return 'Informe um e-mail válido';
                   }
-
                   return null;
                 },
               ),
-
               const SizedBox(height: 16),
-
               TextFormField(
                 controller: senhaController,
                 obscureText: true,
@@ -233,17 +200,13 @@ class _CadastroUsuarioPageState
                   border: OutlineInputBorder(),
                 ),
                 validator: (valor) {
-                  if (valor == null ||
-                      valor.trim().length < 6) {
+                  if (valor == null || valor.trim().length < 6) {
                     return 'A senha deve ter pelo menos 6 caracteres';
                   }
-
                   return null;
                 },
               ),
-
               const SizedBox(height: 24),
-
               ElevatedButton(
                 onPressed: salvar,
                 child: const Text('Salvar'),

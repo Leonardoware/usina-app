@@ -1,33 +1,56 @@
 import 'package:flutter/material.dart';
-import 'package:usina_app/models/unidadeMedida.dart';
+
+
+
 
 class CadastroUnidadeMedidaPage extends StatefulWidget {
   const CadastroUnidadeMedidaPage({super.key});
+
+
+
 
   @override
   State<CadastroUnidadeMedidaPage> createState() =>
       _CadastroUnidadeMedidaPageState();
 }
 
+
+
+
 class _CadastroUnidadeMedidaPageState
     extends State<CadastroUnidadeMedidaPage> {
   final formKey = GlobalKey<FormState>();
 
+
+
+
   final nomeController = TextEditingController();
   final simboloController = TextEditingController();
+
+
+
 
   @override
   void dispose() {
     nomeController.dispose();
     simboloController.dispose();
 
+
+
+
     super.dispose();
   }
+
+
+
 
   void salvar() {
     if (formKey.currentState!.validate()) {
       print('Nome: ${nomeController.text.trim()}');
       print('Símbolo: ${simboloController.text.trim()}');
+
+
+
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -38,6 +61,9 @@ class _CadastroUnidadeMedidaPageState
       );
     }
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -63,11 +89,20 @@ class _CadastroUnidadeMedidaPageState
                     return 'Informe o nome';
                   }
 
+
+
+
                   return null;
                 },
               ),
 
+
+
+
               const SizedBox(height: 16),
+
+
+
 
               TextFormField(
                 controller: simboloController,
@@ -81,11 +116,20 @@ class _CadastroUnidadeMedidaPageState
                     return 'Informe o símbolo';
                   }
 
+
+
+
                   return null;
                 },
               ),
 
+
+
+
               const SizedBox(height: 24),
+
+
+
 
               ElevatedButton(
                 onPressed: salvar,

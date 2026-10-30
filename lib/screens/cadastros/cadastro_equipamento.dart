@@ -1,33 +1,56 @@
 import 'package:flutter/material.dart';
-import 'package:usina_app/models/equipamento.dart';
+
+
+
 
 class CadastroEquipamentoPage extends StatefulWidget {
   const CadastroEquipamentoPage({super.key});
+
+
+
 
   @override
   State<CadastroEquipamentoPage> createState() =>
       _CadastroEquipamentoPageState();
 }
 
+
+
+
 class _CadastroEquipamentoPageState
     extends State<CadastroEquipamentoPage> {
   final formKey = GlobalKey<FormState>();
 
+
+
+
   final nomeController = TextEditingController();
   final unidadeController = TextEditingController();
+
+
+
 
   @override
   void dispose() {
     nomeController.dispose();
     unidadeController.dispose();
 
+
+
+
     super.dispose();
   }
+
+
+
 
   void salvar() {
     if (formKey.currentState!.validate()) {
       print('Nome: ${nomeController.text.trim()}');
       print('Unidade: ${unidadeController.text.trim()}');
+
+
+
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -38,6 +61,9 @@ class _CadastroEquipamentoPageState
       );
     }
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -63,11 +89,20 @@ class _CadastroEquipamentoPageState
                     return 'Informe o nome';
                   }
 
+
+
+
                   return null;
                 },
               ),
 
+
+
+
               const SizedBox(height: 16),
+
+
+
 
               TextFormField(
                 controller: unidadeController,
@@ -80,11 +115,20 @@ class _CadastroEquipamentoPageState
                     return 'Informe a unidade';
                   }
 
+
+
+
                   return null;
                 },
               ),
 
+
+
+
               const SizedBox(height: 24),
+
+
+
 
               ElevatedButton(
                 onPressed: salvar,

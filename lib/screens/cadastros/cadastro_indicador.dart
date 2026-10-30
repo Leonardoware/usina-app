@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import '../../models/indicador.dart';
 import '../../services/indicador_service.dart';
 
+
 class CadastroIndicadorPage extends StatefulWidget {
   final Indicador? indicador;
   const CadastroIndicadorPage({super.key, this.indicador});
   @override
   State<CadastroIndicadorPage> createState() => _CadastroIndicadorPageState();
 }
+
 
 class _CadastroIndicadorPageState extends State<CadastroIndicadorPage> {
   final chave = GlobalKey<FormState>();
@@ -26,6 +28,7 @@ class _CadastroIndicadorPageState extends State<CadastroIndicadorPage> {
     }
   }
 
+
   @override
   void dispose() {
     nome.dispose();
@@ -33,6 +36,7 @@ class _CadastroIndicadorPageState extends State<CadastroIndicadorPage> {
     url.dispose();
     super.dispose();
   }
+
 
   Future<void> salvar() async {
     if (!chave.currentState!.validate()) return;
@@ -61,6 +65,7 @@ class _CadastroIndicadorPageState extends State<CadastroIndicadorPage> {
       if (mounted) setState(() => salvando = false);
     }
   }
+
 
   @override
   Widget build(BuildContext context) => Scaffold(

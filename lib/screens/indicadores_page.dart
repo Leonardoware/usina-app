@@ -50,10 +50,11 @@ class _IndicadoresPageState extends State<IndicadoresPage> {
       await service.excluir(item.id!);
       if (mounted) recarregar();
     } catch (e) {
-      if (mounted)
+      if (mounted) {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text('Erro ao excluir: $e')));
+      }
     }
   }
 
@@ -67,9 +68,10 @@ class _IndicadoresPageState extends State<IndicadoresPage> {
     body: FutureBuilder<List<Indicador>>(
       future: dados,
       builder: (context, s) {
-        if (s.connectionState != ConnectionState.done)
+        if (s.connectionState != ConnectionState.done) {
           return const Center(child: CircularProgressIndicator());
-        if (s.hasError)
+        }
+        if (s.hasError) {
           return Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -82,9 +84,11 @@ class _IndicadoresPageState extends State<IndicadoresPage> {
               ],
             ),
           );
+        }
         final itens = s.data ?? [];
-        if (itens.isEmpty)
+        if (itens.isEmpty) {
           return const Center(child: Text('Nenhum indicador cadastrado'));
+        }
         return RefreshIndicator(
           onRefresh: () async {
             recarregar();

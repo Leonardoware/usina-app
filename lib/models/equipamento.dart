@@ -1,13 +1,12 @@
-import 'package:usina_app/models/unidade.dart';
-
 class Equipamento {
-  final int id;
+  final int? id;
   final String nome;
-  final Unidade unidade;
-
-  Equipamento({
-    required this.id,
-    required this.nome,
-    required this.unidade,
-  });
+  final int unidadeId;
+  const Equipamento({this.id, required this.nome, required this.unidadeId});
+  factory Equipamento.fromJson(Map<String, dynamic> j) => Equipamento(
+    id: (j['Id'] as num?)?.toInt(),
+    nome: j['Nome'] as String? ?? '',
+    unidadeId: (j['UnidadeId'] as num).toInt(),
+  );
+  Map<String, dynamic> toJson() => {'Nome': nome, 'UnidadeId': unidadeId};
 }

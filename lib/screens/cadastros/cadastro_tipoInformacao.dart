@@ -1,28 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:usina_app/models/tipoInformacao.dart';
+
+
+
 
 class CadastroTipoInformacaoPage extends StatefulWidget {
   const CadastroTipoInformacaoPage({super.key});
+
+
+
 
   @override
   State<CadastroTipoInformacaoPage> createState() =>
       _CadastroTipoInformacaoPageState();
 }
 
+
+
+
 class _CadastroTipoInformacaoPageState
     extends State<CadastroTipoInformacaoPage> {
   final formKey = GlobalKey<FormState>();
 
+
+
+
   final nomeController = TextEditingController();
   final unidadeMedidaController = TextEditingController();
+
+
+
 
   @override
   void dispose() {
     nomeController.dispose();
     unidadeMedidaController.dispose();
 
+
+
+
     super.dispose();
   }
+
+
+
 
   void salvar() {
     if (formKey.currentState!.validate()) {
@@ -31,6 +51,9 @@ class _CadastroTipoInformacaoPageState
         'Unidade de medida: '
         '${unidadeMedidaController.text.trim()}',
       );
+
+
+
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -41,6 +64,9 @@ class _CadastroTipoInformacaoPageState
       );
     }
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -66,11 +92,20 @@ class _CadastroTipoInformacaoPageState
                     return 'Informe o nome';
                   }
 
+
+
+
                   return null;
                 },
               ),
 
+
+
+
               const SizedBox(height: 16),
+
+
+
 
               TextFormField(
                 controller: unidadeMedidaController,
@@ -83,11 +118,20 @@ class _CadastroTipoInformacaoPageState
                     return 'Informe a unidade de medida';
                   }
 
+
+
+
                   return null;
                 },
               ),
 
+
+
+
               const SizedBox(height: 24),
+
+
+
 
               ElevatedButton(
                 onPressed: salvar,

@@ -11,6 +11,12 @@ import 'package:usina_app/models/indicador.dart';
 import '/services/indicador_service.dart';
 import 'indicadores_page.dart';
 import 'indicador_webview.dart';
+import 'cruds/crud_safra_page.dart';
+import 'cruds/crud_unidade_page.dart';
+import 'cruds/crud_unidade_medida_page.dart';
+import 'cruds/crud_equipamento_page.dart';
+import 'cruds/crud_tipo_informacao_page.dart';
+import 'cruds/crud_medicao_page.dart';
 
 class TelaPrincipal extends StatefulWidget {
   const TelaPrincipal({super.key});
@@ -37,6 +43,14 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
       },
     );
   }
+
+  Widget itemCrud(String titulo, Widget pagina) => ListTile(
+    title: Text(titulo),
+    onTap: () {
+      Navigator.pop(context);
+      Navigator.push(context, MaterialPageRoute(builder: (_) => pagina));
+    },
+  );
 
   Widget montarMenu() {
     return ListView(
@@ -71,8 +85,9 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                   );
                 }
                 final lista = snapshot.data!;
-                if (lista.isEmpty)
+                if (lista.isEmpty) {
                   return const ListTile(title: Text('Nenhum indicador'));
+                }
                 return Column(
                   children: lista
                       .map(
@@ -114,6 +129,13 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
             });
           },
         ),
+
+        itemCrud('Safra', const CrudSafraPage()),
+        itemCrud('Unidade', const CrudUnidadePage()),
+        itemCrud('Unidade de Medida', const CrudUnidadeMedidaPage()),
+        itemCrud('Equipamento', const CrudEquipamentoPage()),
+        itemCrud('Tipo de Informação', const CrudTipoInformacaoPage()),
+        itemCrud('Medição', const CrudMedicaoPage()),
 
         if (cadastroAberto) ...[
           ListTile(

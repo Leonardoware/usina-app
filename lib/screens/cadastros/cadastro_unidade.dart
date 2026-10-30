@@ -1,30 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:usina_app/models/unidade.dart';
+
+
+
 
 class CadastroUnidadePage extends StatefulWidget {
   const CadastroUnidadePage({super.key});
+
+
+
 
   @override
   State<CadastroUnidadePage> createState() =>
       _CadastroUnidadePageState();
 }
 
+
+
+
 class _CadastroUnidadePageState
     extends State<CadastroUnidadePage> {
   final formKey = GlobalKey<FormState>();
 
+
+
+
   final nomeController = TextEditingController();
+
+
+
 
   @override
   void dispose() {
     nomeController.dispose();
 
+
+
+
     super.dispose();
   }
+
+
+
 
   void salvar() {
     if (formKey.currentState!.validate()) {
       print('Nome: ${nomeController.text.trim()}');
+
+
+
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -35,6 +58,9 @@ class _CadastroUnidadePageState
       );
     }
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -60,11 +86,20 @@ class _CadastroUnidadePageState
                     return 'Informe o nome';
                   }
 
+
+
+
                   return null;
                 },
               ),
 
+
+
+
               const SizedBox(height: 24),
+
+
+
 
               ElevatedButton(
                 onPressed: salvar,

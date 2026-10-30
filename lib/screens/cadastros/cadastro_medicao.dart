@@ -1,24 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:usina_app/models/medicao.dart';
+
+
+
 
 class CadastroMedicaoPage extends StatefulWidget {
   const CadastroMedicaoPage({super.key});
+
+
+
 
   @override
   State<CadastroMedicaoPage> createState() =>
       _CadastroMedicaoPageState();
 }
 
+
+
+
 class _CadastroMedicaoPageState
     extends State<CadastroMedicaoPage> {
   final formKey = GlobalKey<FormState>();
+
+
+
 
   final safraController = TextEditingController();
   final equipamentoController = TextEditingController();
   final tipoInformacaoController = TextEditingController();
   final valorController = TextEditingController();
 
+
+
+
   DateTime? data;
+
+
+
 
   @override
   void dispose() {
@@ -27,8 +44,14 @@ class _CadastroMedicaoPageState
     tipoInformacaoController.dispose();
     valorController.dispose();
 
+
+
+
     super.dispose();
   }
+
+
+
 
   Future<void> selecionarData() async {
     final dataSelecionada = await showDatePicker(
@@ -38,18 +61,30 @@ class _CadastroMedicaoPageState
       lastDate: DateTime(2100),
     );
 
+
+
+
     if (dataSelecionada == null) {
       return;
     }
+
+
+
 
     final horaSelecionada = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
     );
 
+
+
+
     if (horaSelecionada == null) {
       return;
     }
+
+
+
 
     setState(() {
       data = DateTime(
@@ -62,11 +97,17 @@ class _CadastroMedicaoPageState
     });
   }
 
+
+
+
   void salvar() {
     if (formKey.currentState!.validate()) {
       final valor = double.tryParse(
         valorController.text.trim().replaceAll(',', '.'),
       );
+
+
+
 
       if (valor == null) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -77,8 +118,14 @@ class _CadastroMedicaoPageState
           ),
         );
 
+
+
+
         return;
       }
+
+
+
 
       print('Safra: ${safraController.text.trim()}');
       print(
@@ -92,6 +139,9 @@ class _CadastroMedicaoPageState
       print('Valor: $valor');
       print('Data: $data');
 
+
+
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
@@ -102,10 +152,16 @@ class _CadastroMedicaoPageState
     }
   }
 
+
+
+
   String formatarData(DateTime? data) {
     if (data == null) {
       return 'Selecione data e hora';
     }
+
+
+
 
     return '${data.day.toString().padLeft(2, '0')}/'
         '${data.month.toString().padLeft(2, '0')}/'
@@ -113,6 +169,9 @@ class _CadastroMedicaoPageState
         '${data.hour.toString().padLeft(2, '0')}:'
         '${data.minute.toString().padLeft(2, '0')}';
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -138,11 +197,20 @@ class _CadastroMedicaoPageState
                     return 'Informe a safra';
                   }
 
+
+
+
                   return null;
                 },
               ),
 
+
+
+
               const SizedBox(height: 16),
+
+
+
 
               TextFormField(
                 controller: equipamentoController,
@@ -155,11 +223,20 @@ class _CadastroMedicaoPageState
                     return 'Informe o equipamento';
                   }
 
+
+
+
                   return null;
                 },
               ),
 
+
+
+
               const SizedBox(height: 16),
+
+
+
 
               TextFormField(
                 controller: tipoInformacaoController,
@@ -172,11 +249,20 @@ class _CadastroMedicaoPageState
                     return 'Informe o tipo de informação';
                   }
 
+
+
+
                   return null;
                 },
               ),
 
+
+
+
               const SizedBox(height: 16),
+
+
+
 
               TextFormField(
                 controller: valorController,
@@ -192,19 +278,34 @@ class _CadastroMedicaoPageState
                     return 'Informe o valor';
                   }
 
+
+
+
                   final numero = double.tryParse(
                     valor.trim().replaceAll(',', '.'),
                   );
+
+
+
 
                   if (numero == null) {
                     return 'Informe um valor numérico válido';
                   }
 
+
+
+
                   return null;
                 },
               ),
 
+
+
+
               const SizedBox(height: 16),
+
+
+
 
               OutlinedButton(
                 onPressed: selecionarData,
@@ -213,7 +314,13 @@ class _CadastroMedicaoPageState
                 ),
               ),
 
+
+
+
               const SizedBox(height: 24),
+
+
+
 
               ElevatedButton(
                 onPressed: salvar,

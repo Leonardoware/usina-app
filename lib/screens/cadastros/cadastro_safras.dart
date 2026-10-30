@@ -1,29 +1,52 @@
 import 'package:flutter/material.dart';
-import 'package:usina_app/models/safra.dart';
+
+
+
 
 class CadastroSafraPage extends StatefulWidget {
   const CadastroSafraPage({super.key});
+
+
+
 
   @override
   State<CadastroSafraPage> createState() =>
       _CadastroSafraPageState();
 }
 
+
+
+
 class _CadastroSafraPageState
     extends State<CadastroSafraPage> {
   final formKey = GlobalKey<FormState>();
 
+
+
+
   final nomeController = TextEditingController();
+
+
+
 
   DateTime? dataInicio;
   DateTime? dataFim;
+
+
+
 
   @override
   void dispose() {
     nomeController.dispose();
 
+
+
+
     super.dispose();
   }
+
+
+
 
   Future<void> selecionarDataInicio() async {
     final data = await showDatePicker(
@@ -33,12 +56,18 @@ class _CadastroSafraPageState
       lastDate: DateTime(2100),
     );
 
+
+
+
     if (data != null) {
       setState(() {
         dataInicio = data;
       });
     }
   }
+
+
+
 
   Future<void> selecionarDataFim() async {
     final data = await showDatePicker(
@@ -48,6 +77,9 @@ class _CadastroSafraPageState
       lastDate: DateTime(2100),
     );
 
+
+
+
     if (data != null) {
       setState(() {
         dataFim = data;
@@ -55,11 +87,17 @@ class _CadastroSafraPageState
     }
   }
 
+
+
+
   void salvar() {
     if (formKey.currentState!.validate()) {
       print('Nome: ${nomeController.text.trim()}');
       print('Data início: $dataInicio');
       print('Data fim: $dataFim');
+
+
+
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -71,15 +109,24 @@ class _CadastroSafraPageState
     }
   }
 
+
+
+
   String formatarData(DateTime? data) {
     if (data == null) {
       return 'Selecione uma data';
     }
 
+
+
+
     return '${data.day.toString().padLeft(2, '0')}/'
         '${data.month.toString().padLeft(2, '0')}/'
         '${data.year}';
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -105,11 +152,20 @@ class _CadastroSafraPageState
                     return 'Informe o nome';
                   }
 
+
+
+
                   return null;
                 },
               ),
 
+
+
+
               const SizedBox(height: 16),
+
+
+
 
               OutlinedButton(
                 onPressed: selecionarDataInicio,
@@ -118,7 +174,13 @@ class _CadastroSafraPageState
                 ),
               ),
 
+
+
+
               const SizedBox(height: 16),
+
+
+
 
               OutlinedButton(
                 onPressed: selecionarDataFim,
@@ -127,7 +189,13 @@ class _CadastroSafraPageState
                 ),
               ),
 
+
+
+
               const SizedBox(height: 24),
+
+
+
 
               ElevatedButton(
                 onPressed: salvar,
